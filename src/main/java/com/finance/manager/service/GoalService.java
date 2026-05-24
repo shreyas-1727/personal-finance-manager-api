@@ -118,7 +118,7 @@ public class GoalService {
 
         Map<String, Object> stats = new HashMap<>();
         stats.put("currentProgress", currentProgress);
-        stats.put("progressPercentage", percentage);
+        stats.put("progressPercentage", percentage.doubleValue());
         stats.put("remainingAmount", remainingAmount);
 
         return stats;

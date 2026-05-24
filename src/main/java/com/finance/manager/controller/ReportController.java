@@ -30,6 +30,12 @@ public class ReportController {
             @PathVariable int year,
             @PathVariable int month,
             HttpSession session) {
+        
+        // NEW: Validate the month input
+        if (month < 1 || month > 12) {
+            throw new IllegalArgumentException("Invalid month. Must be between 1 and 12.");
+        }
+
         Long userId = getUserIdOrThrow(session);
         return ResponseEntity.ok(reportService.getMonthlyReport(userId, year, month));
     }
