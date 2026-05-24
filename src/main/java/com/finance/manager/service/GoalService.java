@@ -1,6 +1,7 @@
 package com.finance.manager.service;
 
 import com.finance.manager.dto.GoalRequest;
+import com.finance.manager.dto.GoalUpdateRequest;
 import com.finance.manager.entity.Goal;
 import com.finance.manager.entity.Transaction;
 import com.finance.manager.entity.User;
@@ -56,11 +57,15 @@ public class GoalService {
                 .orElseThrow(() -> new IllegalArgumentException("Goal not found"));
     }
 
-    public Goal updateGoal(Long goalId, GoalRequest request, Long userId) {
+    public Goal updateGoal(Long goalId, GoalUpdateRequest request, Long userId) {
         Goal goal = getGoalById(goalId, userId);
 
-        goal.setTargetAmount(request.getTargetAmount());
-        goal.setTargetDate(request.getTargetDate());
+        if (request.getTargetAmount() != null) {
+            goal.setTargetAmount(request.getTargetAmount());
+        }
+        if (request.getTargetDate() != null) {
+            goal.setTargetDate(request.getTargetDate());
+        }
         
         return goalRepository.save(goal);
     }

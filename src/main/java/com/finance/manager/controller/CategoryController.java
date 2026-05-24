@@ -44,6 +44,7 @@ public class CategoryController {
             map.put("name", cat.getName());
             map.put("type", cat.getType());
             map.put("isCustom", cat.getIsCustom());
+            map.put("custom", cat.getIsCustom());
             return map;
         }).collect(Collectors.toList());
 
@@ -62,6 +63,7 @@ public class CategoryController {
         response.put("name", savedCategory.getName());
         response.put("type", savedCategory.getType());
         response.put("isCustom", savedCategory.getIsCustom());
+        response.put("custom", savedCategory.getIsCustom());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

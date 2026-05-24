@@ -1,6 +1,7 @@
 package com.finance.manager.controller;
 
 import com.finance.manager.dto.TransactionRequest;
+import com.finance.manager.dto.TransactionUpdateRequest;
 import com.finance.manager.entity.Transaction;
 import com.finance.manager.service.TransactionService;
 import jakarta.servlet.http.HttpSession;
@@ -75,7 +76,7 @@ public class TransactionController {
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, Object>> updateTransaction(
             @PathVariable Long id, 
-            @Valid @RequestBody TransactionRequest request, 
+            @Valid @RequestBody TransactionUpdateRequest request, 
             HttpSession session) {
         
         Long userId = getUserIdOrThrow(session);

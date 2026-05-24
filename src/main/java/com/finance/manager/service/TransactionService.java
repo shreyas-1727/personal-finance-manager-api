@@ -1,6 +1,7 @@
 package com.finance.manager.service;
 
 import com.finance.manager.dto.TransactionRequest;
+import com.finance.manager.dto.TransactionUpdateRequest;
 import com.finance.manager.entity.Category;
 import com.finance.manager.entity.Transaction;
 import com.finance.manager.entity.User;
@@ -63,22 +64,26 @@ public class TransactionService {
                 .collect(Collectors.toList());
     }
 
-    public Transaction updateTransaction(Long transactionId, TransactionRequest request, Long userId) {
+    public Transaction updateTransaction(Long transactionId, TransactionUpdateRequest request, Long userId) {
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new IllegalArgumentException("Transaction not found"));
 
-        // Ensure the transaction actually belongs to the logged-in user
         if (!transaction.getUser().getId().equals(userId)) {
             throw new SecurityException("Unauthorized access to this transaction");
         }
 
-        Category category = getValidCategoryForUser(request.getCategory(), userId);
-
-        // Update fields (Explicitly skipping the date field as per assignment rules)
-        transaction.setAmount(request.getAmount());
-        transaction.setCategory(category);
-        transaction.setDescription(request.getDescription());
-
+        if (request.getAmount() != null) {
+            transaction.setAmount(request.getAmount());
+        }
+        if (request.getCategory() != null) {
+            Category category = getValidCategoryForUser(request.getCategory(), userId);
+            transaction.setCategory(category);
+        }
+        if (request.getDescription() != null) {
+            transaction.setDescription(request.getDescription());
+        }
+        
+        // Date is intentionally ignored per assignment requirements
         return transactionRepository.save(transaction);
     }
 

@@ -1,6 +1,7 @@
 package com.finance.manager.controller;
 
 import com.finance.manager.dto.GoalRequest;
+import com.finance.manager.dto.GoalUpdateRequest;
 import com.finance.manager.entity.Goal;
 import com.finance.manager.service.GoalService;
 import jakarta.servlet.http.HttpSession;
@@ -80,7 +81,7 @@ public class GoalController {
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, Object>> updateGoal(
             @PathVariable Long id, 
-            @Valid @RequestBody GoalRequest request, 
+            @Valid @RequestBody GoalUpdateRequest request, 
             HttpSession session) {
         
         Long userId = getUserIdOrThrow(session);
