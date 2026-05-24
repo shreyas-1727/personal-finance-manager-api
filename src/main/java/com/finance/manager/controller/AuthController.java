@@ -19,6 +19,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller responsible for handling user registration and session-based authentication.
+ */
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -42,18 +46,15 @@ public class AuthController {
     public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         User user = authService.authenticateUser(request);
         
-        // 1. Create the standard session
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("userId", user.getId());
 
-        // 2. NEW: Tell Spring Security's "Bouncer" that this user is officially logged in
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 user.getUsername(), null, Collections.emptyList());
         context.setAuthentication(authToken);
         SecurityContextHolder.setContext(context);
         
-        // 3. NEW: Save that security context into the session so it persists across requests
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
         Map<String, Object> response = new HashMap<>();
@@ -68,7 +69,6 @@ public class AuthController {
             session.invalidate();
         }
         
-        // NEW: Clear the Spring Security clipboard on logout
         SecurityContextHolder.clearContext(); 
 
         Map<String, Object> response = new HashMap<>();

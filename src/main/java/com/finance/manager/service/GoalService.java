@@ -17,6 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service class managing savings goals, including dynamic progress calculations based on transaction history.
+ */
+
 @Service
 public class GoalService {
 

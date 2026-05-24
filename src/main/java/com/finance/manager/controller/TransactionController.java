@@ -17,6 +17,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Controller responsible for managing user financial transactions.
+ * Handles CRUD operations and ensures data isolation per user.
+ */
+
 @RestController
 @RequestMapping("/api/transactions")
 public class TransactionController {
@@ -35,7 +40,6 @@ public class TransactionController {
         return userId;
     }
 
-    // Helper method to format a transaction exactly as the PDF requires
     private Map<String, Object> formatTransactionResponse(Transaction t) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", t.getId());
@@ -43,7 +47,7 @@ public class TransactionController {
         map.put("date", t.getDate().toString());
         map.put("category", t.getCategory().getName());
         map.put("description", t.getDescription());
-        map.put("type", t.getCategory().getType()); // Included from the Category entity
+        map.put("type", t.getCategory().getType()); 
         return map;
     }
 

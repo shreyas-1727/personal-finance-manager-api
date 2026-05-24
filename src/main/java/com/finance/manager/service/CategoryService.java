@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class handling the validation and retrieval of financial categories.
+ */
+
 @Service
 public class CategoryService {
 
@@ -51,7 +55,6 @@ public class CategoryService {
             throw new IllegalArgumentException("Cannot delete default system categories");
         }
 
-        // Note: We will add the logic to check for linked transactions later when we build the Transaction module.
         categoryRepository.delete(category);
     }
 }

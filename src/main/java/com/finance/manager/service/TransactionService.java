@@ -14,6 +14,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class managing transaction creation, validation, and updates.
+ */
+
 @Service
 public class TransactionService {
 
@@ -83,7 +87,6 @@ public class TransactionService {
             transaction.setDescription(request.getDescription());
         }
         
-        // Date is intentionally ignored per assignment requirements
         return transactionRepository.save(transaction);
     }
 

@@ -75,7 +75,7 @@ class AuthServiceTest {
         when(userRepository.existsByUsername("test@example.com")).thenReturn(true);
         when(userRepository.findByUsername("test@example.com")).thenReturn(Optional.of(testUser));
 
-        // Act & Assert (Using Exception.class catches whatever specific exception you used)
+        // Act & Assert 
         assertThrows(Exception.class, () -> {
             authService.registerUser(registerRequest);
         });

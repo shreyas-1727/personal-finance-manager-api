@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Controller responsible for tracking and managing user savings goals.
+ */
+
 @RestController
 @RequestMapping("/api/goals")
 public class GoalController {

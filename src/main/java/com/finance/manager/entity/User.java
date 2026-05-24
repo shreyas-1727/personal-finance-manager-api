@@ -3,7 +3,7 @@ package com.finance.manager.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users") // "user" is a reserved keyword in some databases, so we use "users"
+@Table(name = "users") 
 public class User {
 
     @Id

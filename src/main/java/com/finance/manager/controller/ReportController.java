@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * Controller responsible for generating monthly and yearly financial analytics reports.
+ */
+
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
@@ -31,7 +35,6 @@ public class ReportController {
             @PathVariable int month,
             HttpSession session) {
         
-        // NEW: Validate the month input
         if (month < 1 || month > 12) {
             throw new IllegalArgumentException("Invalid month. Must be between 1 and 12.");
         }

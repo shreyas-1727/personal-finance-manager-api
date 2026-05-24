@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Service class responsible for aggregating transaction data to calculate net savings and category totals.
+ */
+
 @Service
 public class ReportService {
 
@@ -19,7 +23,6 @@ public class ReportService {
         this.transactionRepository = transactionRepository;
     }
 
-    // Core logic to group transactions and calculate totals
     private Map<String, Object> generateReportData(List<Transaction> transactions, int year, Integer month) {
         Map<String, BigDecimal> totalIncome = new HashMap<>();
         Map<String, BigDecimal> totalExpenses = new HashMap<>();
@@ -41,7 +44,6 @@ public class ReportService {
 
         BigDecimal netSavings = totalIncomeSum.subtract(totalExpenseSum);
 
-        // Build the exact JSON structure required by the PDF
         Map<String, Object> report = new HashMap<>();
         if (month != null) {
             report.put("month", month);

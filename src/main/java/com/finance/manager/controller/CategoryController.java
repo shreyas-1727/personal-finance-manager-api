@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Controller responsible for retrieving default categories and managing custom user categories.
+ */
+
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
@@ -24,7 +28,6 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    // Helper method to check authentication
     private Long getUserIdOrThrow(HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
         if (userId == null) {
@@ -38,7 +41,6 @@ public class CategoryController {
         Long userId = getUserIdOrThrow(session);
         List<Category> categories = categoryService.getCategoriesForUser(userId);
 
-        // Format the response exactly as requested in the assignment PDF
         List<Map<String, Object>> formattedCategories = categories.stream().map(cat -> {
             Map<String, Object> map = new HashMap<>();
             map.put("name", cat.getName());

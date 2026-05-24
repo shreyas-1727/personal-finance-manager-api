@@ -26,7 +26,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TransactionServiceTest {
 
-    // 1. Create fake versions of our database repositories
     @Mock
     private TransactionRepository transactionRepository;
 
@@ -36,7 +35,6 @@ class TransactionServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    // 2. Inject those fake repositories into the real TransactionService
     @InjectMocks
     private TransactionService transactionService;
 
@@ -44,7 +42,6 @@ class TransactionServiceTest {
     private Category testCategory;
     private TransactionRequest validRequest;
 
-    // 3. Set up standard test data before each test runs
     @BeforeEach
     void setUp() {
         testUser = new User();
